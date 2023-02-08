@@ -967,14 +967,15 @@ class GLTF2(Property):
                 continue
             byte_offset = bufferView.byteOffset if bufferView.byteOffset is not None else 0
             byte_length = bufferView.byteLength
-            if byte_length % 4 != 0:  # pad each segment of binary blob
-                byte_length += 4 - byte_length % 4
-
-            buffer_blob += data[byte_offset:byte_offset + byte_length]
 
             bufferView.byteOffset = offset
             bufferView.byteLength = byte_length
             bufferView.buffer = 0
+
+            buffer_blob += data[byte_offset:byte_offset + byte_length]
+            if byte_length % 4 != 0:  # Pad each buffer to 4 bytes to make following data happy
+                buffer_blob += b'\0\0\0'[0:4 - byte_length % 4]
+                offset += 4 - byte_length % 4
             offset += byte_length
 
         return buffer_blob
