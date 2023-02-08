@@ -26,6 +26,7 @@ import pytest
 import pygltflib
 from pygltflib import (
     ARRAY_BUFFER,
+    DATA_URI_HEADER,
     ELEMENT_ARRAY_BUFFER,
     FLOAT,
     SCALAR,
@@ -191,6 +192,36 @@ class TestOutput:
         assert our_glb.asset.version == "2.0"
         # assert ref_glb.bufferViews == our_glb.bufferViews
 
+    def test_glb_buffer_alignment(self):
+        """ Save a GLB file and verify (correct) alignment """
+        gltf = GLTF2()
+        datas = [b'1', b'12', b'123', b'1234', b'12345', b'123456']
+        for data in datas:
+            buffer = Buffer()
+            buffer.byteLength = len(data)
+            buffer.uri = DATA_URI_HEADER + base64.b64encode(data).decode('utf8')
+            bufferView = BufferView()
+            bufferView.buffer = len(gltf.buffers)
+            bufferView.byteLength = buffer.byteLength
+            gltf.buffers.append(buffer)
+            gltf.bufferViews.append(bufferView)
+        output = b''.join(gltf.save_to_bytes())
+        gltf = GLTF2.load_from_bytes(output)
+        # Technically they don't need to be aligned to 4 bytes from what
+        # I understand, because it depends on the accessor using the data.
+        assert gltf.bufferViews[0].byteOffset == 0
+        assert gltf.bufferViews[1].byteOffset == 4
+        assert gltf.bufferViews[2].byteOffset == 8
+        assert gltf.bufferViews[3].byteOffset == 12
+        assert gltf.bufferViews[4].byteOffset == 16
+        assert gltf.bufferViews[5].byteOffset == 24
+        blob = gltf.binary_blob()
+        for i, expected_data in enumerate(datas):
+            view = gltf.bufferViews[i]
+            assert view.buffer == 0
+            assert view.byteLength == len(expected_data)
+            found_data = blob[view.byteOffset : view.byteOffset + view.byteLength]
+            assert found_data == expected_data
 
 class TestConversion:
     def setup_method(self, _test_method):
@@ -626,14 +657,14 @@ class TestDefaults:
   },
   "materials": [
     {
-      "alphaCutoff": 0.5,
-      "alphaMode": "OPAQUE",
-      "doubleSided": false,
       "emissiveFactor": [
         0.0,
         0.0,
         0.0
-      ]
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": false
     }
   ]
 }"""
@@ -655,14 +686,6 @@ class TestDefaults:
   },
   "materials": [
     {
-      "alphaCutoff": 0.5,
-      "alphaMode": "OPAQUE",
-      "doubleSided": false,
-      "emissiveFactor": [
-        0.0,
-        0.0,
-        0.0
-      ],
       "pbrMetallicRoughness": {
         "baseColorFactor": [
           1.0,
@@ -672,7 +695,15 @@ class TestDefaults:
         ],
         "metallicFactor": 1.0,
         "roughnessFactor": 1.0
-      }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": false
     }
   ]
 }"""

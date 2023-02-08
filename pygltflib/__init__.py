@@ -282,7 +282,7 @@ class Attributes:
     def to_json(self, *args, **kwargs):
         # Attributes objects can have custom attrs, so use our own json conversion methods.
         data = copy.deepcopy(self.__dict__)
-        return json.dumps(data, **kwargs)
+        return json.dumps(data)
 
     @staticmethod
     def from_json():
@@ -920,12 +920,7 @@ class GLTF2(Property):
         return result
 
     def gltf_to_json(self, separators=None, indent="  ") -> str:
-        return self.to_json(default=json_serial,
-                            indent=indent,
-                            allow_nan=False,
-                            skipkeys=True,
-                            separators=separators,
-                            sort_keys=True)
+        return self.to_json(default=json_serial, indent=indent, allow_nan=False, skipkeys=True, separators=separators)
 
     def save_json(self, fname):
         path = Path(fname)
@@ -972,14 +967,15 @@ class GLTF2(Property):
                 continue
             byte_offset = bufferView.byteOffset if bufferView.byteOffset is not None else 0
             byte_length = bufferView.byteLength
-            if byte_length % 4 != 0:  # pad each segment of binary blob
-                byte_length += 4 - byte_length % 4
-
-            buffer_blob += data[byte_offset:byte_offset + byte_length]
 
             bufferView.byteOffset = offset
             bufferView.byteLength = byte_length
             bufferView.buffer = 0
+
+            buffer_blob += data[byte_offset:byte_offset + byte_length]
+            if byte_length % 4 != 0:  # Pad each buffer to 4 bytes to make following data happy
+                buffer_blob += b'\0\0\0'[0:4 - byte_length % 4]
+                offset += 4 - byte_length % 4
             offset += byte_length
 
         return buffer_blob
