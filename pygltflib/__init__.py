@@ -715,7 +715,7 @@ class GLTF2(Property):
 
     def export_image_to_file(self, image_index, destination_path='', override=False):
         """
-        Used primarly by convert_images. To export images consider using GLTF2.export_image
+        Used primarily by convert_images. To export images consider using GLTF2.export_image
 
         image_index (int): Image index
         destination_path (str|Path): Path where to save images. Images will also be loaded from this path if needed.
