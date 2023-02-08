@@ -289,15 +289,21 @@ We are very interested in hearing your use cases for `pygltflib` to help drive t
 * irtimir
 * Florian Bruggisser
 * Kevin Kreiser
+* Neui
 
 #### Thanks
 `pyltflib` made for 'The Beat: A Glam Noir Game' supported by Film Victoria. 
 
 ### Changelog
+* 1.15.4:
+  * fix buffer alignment by adding padding bytes in GLB export (Neui)
+
 * 1.15.3:
   * Use sort_keys by default for deterministic output (Kevin Kreise)
+
 * 1.15.2:
   * buffer.uri defaults to None (Kevin Kreise)
+
 * 1.15.1:
   * Dataclasses install only required on python 3.6.x (cherry-pick from Saeid Akbari branch)
   * Removed deprecated `AlphaMode` after two years (use the `pygltflib.BLEND`, `pygltflib.MASK`, `pygltflib.OPAQUE` constants directly)
