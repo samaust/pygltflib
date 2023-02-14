@@ -25,12 +25,12 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://gitlab.com/dodgyville/pygltflib",
-    packages=setuptools.find_packages(),
     install_requires=[
         "dataclasses;python_version>='3.6' and python_version<'3.7'",
         "dataclasses-json>=0.0.25",
         "deprecated"
     ],
+    packages=setuptools.find_packages(),
     python_requires=">=3.6",
     classifiers=[
         "Programming Language :: Python :: 3",
