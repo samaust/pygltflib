@@ -930,7 +930,7 @@ class GLTF2(Property):
                 # update the buffer uri to point to our new local bin file
                 glb_data = self.binary_blob()
                 if glb_data:
-                    buffer.uri = str(Path(path.stem).with_suffix(".bin"))
+                    buffer.uri = str(path.with_suffix(".bin"))
                     with open(path.with_suffix(".bin"), "wb") as f:  # save bin file with the gltf file
                         f.write(glb_data)
                 else:
