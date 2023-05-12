@@ -95,7 +95,7 @@ class TestValidator:
         gltf = GLTF2().load(fname)
         assert gltf.asset.version == "2.0"
         assert gltf.accessors[0].bufferView == 0
-        assert gltf.accessors[4].bufferView == 4
+        assert gltf.accessors[3].bufferView == 1
 
 
 class TestIO:
@@ -287,6 +287,7 @@ class TestUtils:
     def test_get_bin_name_from_path(self):
         gltf = GLTF2()
         assert gltf.get_bin_name_from_path(Path("/hello/world.glb")) == "world.bin"
+        assert gltf.get_bin_name_from_path(Path("/hello/world..glb")) == "world..bin"
         assert gltf.get_bin_name_from_path(Path("/hello/world.trouble.glb")) == "world.trouble.bin"
         assert gltf.get_bin_name_from_path(Path("/hello/world")) == "world.bin"
         assert gltf.get_bin_name_from_path(Path("/hello/world.trouble")) == "world.bin"
