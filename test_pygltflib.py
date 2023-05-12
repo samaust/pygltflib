@@ -223,6 +223,7 @@ class TestOutput:
             found_data = blob[view.byteOffset : view.byteOffset + view.byteLength]
             assert found_data == expected_data
 
+
 class TestConversion:
     def setup_method(self, _test_method):
         path = Path(PATH)
@@ -282,6 +283,13 @@ class TestUtils:
         add_indexed_geometry(gltf, indices, vertices)
         gltf.save("test_primitive.gltf")
         pass
+
+    def test_get_bin_name_from_path(self):
+        gltf = GLTF2()
+        assert gltf.get_bin_name_from_path(Path("/hello/world.glb")) == "world.bin"
+        assert gltf.get_bin_name_from_path(Path("/hello/world.trouble.glb")) == "world.trouble.bin"
+        assert gltf.get_bin_name_from_path(Path("/hello/world")) == "world.bin"
+        assert gltf.get_bin_name_from_path(Path("/hello/world.trouble")) == "world.bin"
 
 
 class TestBufferConversions:

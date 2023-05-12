@@ -46,7 +46,7 @@ from dataclasses_json import dataclass_json as dataclass_json
 from dataclasses_json.core import _decode_dataclass
 from dataclasses_json.core import _ExtendedEncoder as JsonEncoder
 
-__version__ = "1.15.5"
+__version__ = "1.15.6"
 
 """
 About the GLTF2 file format:
@@ -922,6 +922,11 @@ class GLTF2(Property):
     def gltf_to_json(self, separators=None, indent="  ") -> str:
         return self.to_json(default=json_serial, indent=indent, allow_nan=False, skipkeys=True, separators=separators)
 
+    @staticmethod
+    def get_bin_name_from_path(path: Path):
+        """ remove an extension and path and return a bin filename (sans path) """
+        return str(Path(path.stem)) + ".bin"
+
     def save_json(self, fname):
         path = Path(fname)
         original_buffers = copy.deepcopy(self.buffers)
@@ -930,7 +935,7 @@ class GLTF2(Property):
                 # update the buffer uri to point to our new local bin file
                 glb_data = self.binary_blob()
                 if glb_data:
-                    buffer.uri = str(path.with_suffix(".bin"))
+                    buffer.uri = self.get_bin_name_from_path(path)
                     with open(path.with_suffix(".bin"), "wb") as f:  # save bin file with the gltf file
                         f.write(glb_data)
                 else:

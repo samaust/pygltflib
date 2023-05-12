@@ -290,11 +290,15 @@ We are very interested in hearing your use cases for `pygltflib` to help drive t
 * Florian Bruggisser
 * Kevin Kreiser
 * Neui
+* Bernhard Rainer
 
 #### Thanks
 `pyltflib` made for 'The Beat: A Glam Noir Game' supported by Film Victoria. 
 
 ### Changelog
+* 1.15.6:
+  * fix buffer.uri and .bin file name mismatch when a glb is loaded from a path that contains additional period characters (Bernhard Rainer)  
+
 * 1.15.4:
   * fix buffer alignment by adding padding bytes in GLB export (Neui)
 
@@ -314,19 +318,6 @@ We are very interested in hearing your use cases for `pygltflib` to help drive t
 * 1.15.0: 
   * Significantly improved `save_to_bytes` performance (20x faster) (Florian Bruggisser)
     * NOTE: Underlying binary blob is now mutable instead of immutable. 
-
-* 1.14.7
-  * add `GLTF.get_data_from_buffer_uri` helper method to simplify access to buffer data (see bounding box example in README.md) (el_flamenco)
-
-* 1.14.6
-  * use compact json when saving binary glb files (Laubeee)
-
-* 1.14.5
-  * unquote filepath in compliance with standard (irtimir)
-
-* 1.14.4
-  * Add `GLTF.export_image` method to export images from an GLTF2 file to any location (Khac Hoa Le)
-  * remove extraneous print message when loading extensions (Michael Daw)
 
 See [CHANGELOG.md] (https://gitlab.com/dodgyville/pygltflib/-/blob/master/CHANGELOG.md) for older versions
 

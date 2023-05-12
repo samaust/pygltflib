@@ -1,3 +1,15 @@
+* 1.15.6:
+  * fix buffer.uri and .bin file name mismatch when a glb is loaded from a path that contains additional period characters (Bernhard Rainer)  
+
+* 1.15.4:
+  * fix buffer alignment by adding padding bytes in GLB export (Neui)
+
+* 1.15.3:
+  * Use sort_keys by default for deterministic output (Kevin Kreise)
+
+* 1.15.2:
+  * buffer.uri defaults to None (Kevin Kreise)
+
 * 1.15.1:
   * Dataclasses install only required on python 3.6.x (cherry-pick from Saeid Akbari branch)
   * Removed deprecated `AlphaMode` after two years (use the `pygltflib.BLEND`, `pygltflib.MASK`, `pygltflib.OPAQUE` constants directly)
