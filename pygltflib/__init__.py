@@ -553,6 +553,7 @@ class GLTF2(Property):
 
     #    _glb_data: Any = None
     #    _path: Any = None
+    #    _min_alignment: int = 4
 
     def binary_blob(self):
         """ Get the binary blob associated with glb files if available
@@ -568,6 +569,38 @@ class GLTF2(Property):
     def destroy_binary_blob(self):
         if hasattr(self, "_glb_data"):
             setattr(self, "_glb_data", None)
+
+    def set_min_alignment(self, min_alignment: Optional[int]) -> None:
+        """Set the minimum alignment for glb chunks.
+
+        A larger alignment may still be used if necessary.
+        Only power-of-two alignments are supported.
+        """
+        if (min_alignment is None) or (min_alignment < 4):
+            min_alignment = 4
+
+        # round up to next power-of-two
+        min_alignment = 1 << (min_alignment - 1).bit_length()
+
+        setattr(self, "_min_alignment", min_alignment)
+
+    def required_alignment(self) -> int:
+        """
+        Get the required alignment for glb chunks.
+
+        By default this is 4, unless a larger alignment is requested or
+        required by an extension.
+
+        Returns
+            required_alignment (int)
+        """
+        alignment = getattr(self, "_min_alignment", 4)
+        if ("EXT_structural_metadata" in self.extensionsUsed or
+                "EXT_structural_metadata" in self.extensionsRequired or
+                "EXT_structural_metadata" in self.extensions):
+            # EXT_structural_metadata requires an 8 byte alignment.
+            alignment = max(alignment, 8)
+        return alignment
 
     def load_file_uri(self, uri):
         """
@@ -978,9 +1011,12 @@ class GLTF2(Property):
             bufferView.buffer = 0
 
             buffer_blob += data[byte_offset:byte_offset + byte_length]
-            if byte_length % 4 != 0:  # Pad each buffer to 4 bytes to make following data happy
-                buffer_blob += b'\0\0\0'[0:4 - byte_length % 4]
-                offset += 4 - byte_length % 4
+
+            # Pad each buffer to the required alignment (usually 4 bytes) to make following data happy
+            padding = -byte_length % self.required_alignment()
+            buffer_blob += b'\0' * padding
+            offset += padding
+
             offset += byte_length
 
         return buffer_blob
@@ -997,13 +1033,19 @@ class GLTF2(Property):
         self.buffers = [new_buffer]
         json_blob = self.gltf_to_json(separators=(',', ':'), indent=None).encode("utf-8")
 
-        # pad each blob if needed
-        if len(json_blob) % 4 != 0:
-            json_blob += b'   '[0:4 - len(json_blob) % 4]
-
         version = struct.pack('<I', GLTF_VERSION)
         chunk_header_len = 8
-        length = len(MAGIC) + len(version) + 4 + chunk_header_len * 2 + len(json_blob) + len(buffer_blob)
+        gltf_header_len = len(MAGIC) + len(version) + 4
+
+        # Pad each blob if needed; include the whole length before the json
+        # too, to reach global alignment. We subtract one chunk header length,
+        # so the start of the binary blob is aligned (otherwise the header
+        # would be aligned, instead of the data).
+        padding = -(gltf_header_len + chunk_header_len + len(json_blob) - chunk_header_len) % self.required_alignment()
+        if padding != 0:
+            json_blob += b' ' * padding
+
+        length = gltf_header_len + chunk_header_len * 2 + len(json_blob) + len(buffer_blob)
 
         self.bufferViews = original_buffer_views  # restore unpacked bufferViews
         self.buffers = original_buffers  # restore unpacked buffers

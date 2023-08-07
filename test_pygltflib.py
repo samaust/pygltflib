@@ -36,6 +36,7 @@ from pygltflib import (
     VEC3,
     Accessor,
     AccessorSparseIndices,
+    Asset,
     Attributes,
     Buffer,
     BufferFormat,
@@ -1020,3 +1021,57 @@ class TestExamples:
             gltf.save("triangle.gltf")
 
 
+class TestAlignment:
+    @pytest.mark.parametrize('alignment', [None, 4, 8, 16])
+    @pytest.mark.parametrize('extra_header_bytes', range(0, 14))
+    @pytest.mark.parametrize('buffer_bytes', range(0, 14))
+    def test_alignment(self, alignment, extra_header_bytes, buffer_bytes, tmp_path: Path):
+        # test that our file ends up aligned correctly
+        gltf = GLTF2(
+            bufferViews=[BufferView(buffer=0, byteLength=buffer_bytes)],
+            buffers=[Buffer(buffer_bytes)],
+        )
+
+        if alignment is not None:
+            gltf.set_min_alignment(alignment)
+        # vary something in the json part to get different sizes in the JSON chunk
+        gltf.asset = Asset(generator='a' * extra_header_bytes)
+        gltf.set_binary_blob(b'b' * buffer_bytes)
+        gltf.save_binary(tmp_path / 'test.glb')
+
+        if alignment is None:
+            expected_alignment = 4
+        else:
+            expected_alignment = alignment
+
+        assert (tmp_path / 'test.glb').stat().st_size % expected_alignment == 0
+
+        gltf_actual = GLTF2.load_binary(tmp_path / 'test.glb')
+        assert len(gltf_actual.binary_blob()) == buffer_bytes + (-buffer_bytes % expected_alignment)
+
+    @pytest.mark.parametrize('alignment, expected_alignment',
+                              [(None, 4), (-1, 4),
+                               (0, 4), (1, 4), (2, 4), (3, 4), (4, 4),
+                               (5, 8), (6, 8), (7, 8), (8, 8),
+                               (9, 16), (12, 16), (15, 16), (16, 16),
+                               (17, 32)])
+    def test_set_min_alignment(self, alignment, expected_alignment):
+        gltf = GLTF2()
+        assert gltf.required_alignment() == 4  # default alignment
+
+        gltf.set_min_alignment(alignment)
+        assert gltf.required_alignment() == expected_alignment
+
+    @pytest.mark.parametrize('alignment, expected_alignment',
+                            [(None, 8), (-1, 8),
+                            (0, 8), (1, 8), (2, 8), (3, 8), (4, 8),
+                            (5, 8), (6, 8), (7, 8), (8, 8),
+                            (9, 16), (12, 16), (15, 16), (16, 16),
+                            (17, 32)])
+    def test_set_min_alignment_ext(self, alignment, expected_alignment):
+        gltf = GLTF2()
+        gltf.extensionsUsed = ["EXT_structural_metadata"]
+        assert gltf.required_alignment() == 8  # default alignment
+
+        gltf.set_min_alignment(alignment)
+        assert gltf.required_alignment() == expected_alignment
