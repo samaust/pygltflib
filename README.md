@@ -34,7 +34,6 @@ It supports the entire specification, including materials and animations. Main f
     * [Export images from the GLTF file to any location (ie outside the GLTF file)?](#export-images-from-the-GLTF-file-to-any-location-ie-outside-the-GLTF-file)
     * [Import PNG files as textures into a GLTF?](#import-png-files-as-textures-into-a-gltf)
 * [About](#about)
-  * [Roadmap](#roadmap)
   * [Contributors](#contributors)
   * [Thanks](#thanks)
   * [Changelog](#changelog)
@@ -48,7 +47,8 @@ It supports the entire specification, including materials and animations. Main f
   * [Converting files](#converting-files)
   * [Converting buffers](#converting-buffers)
   * [Converting texture images](#converting-texture-images)
-  * [Extensions](#extensions)
+* [Extensions](#extensions)
+  * [EXT_structural_metadata](#ext_structural_metadata)
 * [Running the tests](#running-the-tests)
 
 ## Quickstart
