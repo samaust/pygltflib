@@ -817,7 +817,7 @@ This allows future extensions to be automatically supported by pygltflib.
 ### EXT_structural_metadata
 
 The [EXT_structural_metadata](https://github.com/CesiumGS/glTF/tree/3d-tiles-next/extensions/2.0/Vendor/EXT_structural_metadata) 
-is a draft extension 
+is a draft (August 2023) extension 
 that defines a means of storing structured metadata within a glTF 2.0 asset. 
 
 
@@ -825,7 +825,9 @@ that defines a means of storing structured metadata within a glTF 2.0 asset.
 allowing support for 64-bit data types while remaining compatible with the 4-byte alignments in the core glTF specification.
 
 To support this meta extension, when `pygltflib` detects the presence of this extension in a GLTF2 object (for example, if
-EXT_structural_metadata is in `self.extensionsUsed`, `self.extensionsRequired`, or `self.extensions`) will pad using 8-bytes instead of 4.
+EXT_structural_metadata is in `self.extensionsUsed`, `self.extensionsRequired`, or `self.extensions`) will pad chunks using 8-bytes instead of 4.
+
+This alignment value (4 or 8 or indeed any power-of-two value) can be set manually using the `set_min_alignment` method.
 
 
 ## Running the tests
