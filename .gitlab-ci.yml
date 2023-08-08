@@ -40,6 +40,8 @@ pytest-3.10:
   - pytest test_pygltflib.py
 
 merge_request_pipeline-3.10:
+  image: python:3.10-alpine
+  stage: Test python 3.10
   script:
     - echo "This job runs in merge request pipelines"
     - apk add git
