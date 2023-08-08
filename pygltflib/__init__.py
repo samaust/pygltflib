@@ -37,7 +37,7 @@ import mimetypes
 from pathlib import Path
 from shutil import copyfile
 from typing import Any, Dict, List
-from typing import Callable, Optional, Tuple, TypeVar, Union
+from typing import Callable, Optional, Tuple, Type, Union
 from urllib.parse import unquote
 import struct
 import warnings
@@ -57,8 +57,6 @@ The units for all linear distances are meters.
 All angles are in radians.
 Positive rotation is counterclockwise.
 """
-
-A = TypeVar('A')
 
 ANIM_LINEAR = "LINEAR"
 ANIM_STEP = "STEP"
@@ -895,14 +893,14 @@ class GLTF2(Property):
                           **kw)
 
     @classmethod
-    def from_json(cls: A,
+    def from_json(cls: Type['GLTF2'],
                   s: str,
                   *,
                   parse_float=None,
                   parse_int=None,
                   parse_constant=None,
                   infer_missing=False,
-                  **kw) -> A:
+                  **kw) -> 'GLTF2':
         init_kwargs = json.loads(s,
                                  parse_float=parse_float,
                                  parse_int=parse_int,
