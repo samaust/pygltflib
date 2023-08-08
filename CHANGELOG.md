@@ -1,7 +1,8 @@
-* 1.15.7:
+* 1.16.0:
   * fix compile error by removing dead extension code
-  * fix type hint in GLTF2.from_json() (Philip Holzmann) 
-  
+  * fix type hint in GLTF2.from_json() (Philip Holzmann)
+  * add support for larger alignment for BIN-Chunk (for EXT_structural_metadata) (Philip Holzmann)
+
 * 1.15.6:
   * fix buffer.uri and .bin file name mismatch when a glb is loaded from a path that contains additional period characters (Bernhard Rainer)  
 

@@ -262,13 +262,6 @@ Check the table below for an idea of which sample models validate.
 Questions? Contributions? Bug reports? Open an issue on the [gitlab page for the project](https://gitlab.com/dodgyville/pygltflib).
 We are very interested in hearing your use cases for `pygltflib` to help drive the roadmap.
 
-### Roadmap
-* Add helper functions for creating meshes
-* Test coverage
-* Enforce single underscore on custom Attribute attributes 
-* Investigate creating classes from extensions
-* Automated validation and visual inspection
-
 ### Contributors
 * Luke Miller
 * Sebastian Höffner
@@ -291,11 +284,18 @@ We are very interested in hearing your use cases for `pygltflib` to help drive t
 * Kevin Kreiser
 * Neui
 * Bernhard Rainer
+* Philip Holzmann
 
 #### Thanks
 `pyltflib` made for 'The Beat: A Glam Noir Game' supported by Film Victoria. 
 
 ### Changelog
+* 1.16.0:
+  * fix compile error by removing dead extension code
+  * fix type hint in GLTF2.from_json() (Philip Holzmann)
+  * add support for larger alignment for BIN-Chunk (for EXT_structural_metadata) (Philip Holzmann)
+
+
 * 1.15.6:
   * fix buffer.uri and .bin file name mismatch when a glb is loaded from a path that contains additional period characters (Bernhard Rainer)  
 
@@ -800,11 +800,10 @@ assert Path("myfile.png").exists() is True
 ```
 
 
-### Extensions
+## Extensions
 The GLTF2 spec allows for extensions to added to any component of a GLTF file.
 
 As of writing (August 2019) there are [about a dozen extensions from Khronos and other vendors](https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/)
-
 
 In pygltflib, extensions are loaded as ordinary `dict` objects and so should be accessed like regular key,value pairs.
 
@@ -813,6 +812,20 @@ For example `extensions["KHR_draco_mesh_compression"]["bufferView"]` instead of 
 This allows future extensions to be automatically supported by pygltflib.
 
 *Extras* should work the same way.
+
+
+### EXT_structural_metadata
+
+The [EXT_structural_metadata](https://github.com/CesiumGS/glTF/tree/3d-tiles-next/extensions/2.0/Vendor/EXT_structural_metadata) 
+is a draft extension 
+that defines a means of storing structured metadata within a glTF 2.0 asset. 
+
+
+`EXT_structural_metadata` imposes 8-byte binary data alignment requirements on an asset, 
+allowing support for 64-bit data types while remaining compatible with the 4-byte alignments in the core glTF specification.
+
+To support this meta extension, when `pygltflib` detects the presence of this extension in a GLTF2 object (for example, if
+EXT_structural_metadata is in `self.extensionsUsed`, `self.extensionsRequired`, or `self.extensions`) will pad using 8-bytes instead of 4.
 
 
 ## Running the tests
