@@ -38,3 +38,13 @@ pytest-3.10:
   - apk add git
   - git clone https://github.com/KhronosGroup/glTF-Sample-Models.git
   - pytest test_pygltflib.py
+
+merge_request_pipeline-3.10:
+  script:
+    - echo "This job runs in merge request pipelines"
+    - apk add git
+    - git clone https://github.com/KhronosGroup/glTF-Sample-Models.git
+    - pytest test_pygltflib.py
+
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
