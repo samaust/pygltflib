@@ -287,7 +287,7 @@ We are very interested in hearing your use cases for `pygltflib` to help drive t
 * Philip Holzmann
 
 #### Thanks
-`pyltflib` made for 'The Beat: A Glam Noir Game' supported by Film Victoria. 
+`pygltflib` made for 'The Beat: A Glam Noir Game' supported by Film Victoria / VicScreen. 
 
 ### Changelog
 * 1.16.0:

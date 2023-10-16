@@ -2,7 +2,7 @@
 pygltflib : A Python library for reading, writing and handling GLTF files.
 
 
-Copyright (c) 2018,2021 Luke Miller
+Copyright (c) 2018,2023 Luke Miller
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
