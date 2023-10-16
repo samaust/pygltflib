@@ -669,14 +669,14 @@ class GLTF2(Property):
         bufferView = self.bufferViews.pop(buffer_view_id)
 
         def update_obj(title, obj):
-            if obj:
+            if obj and obj.bufferView:
                 if obj.bufferView == buffer_view_id:
                     warnings.warn(f"Removing bufferView {buffer_view_id} but "
                                   f"{title}.bufferView still points to it. This may corrupt the GLTF.")
                 if obj.bufferView >= buffer_view_id:
                     obj.bufferView -= 1
             else:
-                print(f"{obj} empty")
+                print(f"{title} empty")
 
         for i, accessor in enumerate(self.accessors):
             update_obj(f"gltf.accessors[{i}]", accessor)
@@ -688,6 +688,18 @@ class GLTF2(Property):
             update_obj(f"gltf.images[{i}]", obj)
 
         return bufferView
+
+    def remove_data_from_buffer(self, byteOffset, byteLength):
+        if len(self.buffers) == 1:
+            data = self.binary_blob()
+            data = data[:byteOffset] + data[byteOffset + byteLength:]
+            self.set_binary_blob(data)
+            # setting buffer 0 length
+            self.buffers[0].byteLength = len(data)
+            # rearange bufferViews
+            for item in self.bufferViews:
+                if item.byteOffset >= byteOffset+byteLength:
+                    item.byteOffset -= byteLength
 
     def export_datauri_as_image_file(self, data_uri, name, destination, override=False, index=0):
         """ convert data uri to image file
@@ -762,16 +774,13 @@ class GLTF2(Property):
                               f"does not appear to exist.")
             return None
         elif image.bufferView is not None:
-            # TODO: remove bufferView from GLTF when create images or datauris from buffer data
             bufferView = self.bufferViews[image.bufferView]
             buffer = self.buffers[bufferView.buffer]
             if buffer.uri:  # buffer is stored as a data uri or an uri pointing to a non-existent file
                 warnings.warn("pygltflib currently unable to convert image stored buffers to image file."
                               "Please open an issue at https://gitlab.com/dodgyville/pygltflib/issues")
             else:  # buffer is stored in the binary blob
-                warnings.warn(
-                    "pygltflib currently does not remove image data from the buffer when converting to files."
-                    "Please open an issue at https://gitlab.com/dodgyville/pygltflib/issues")
+
                 data = self.binary_blob()
                 extension = mimetypes.guess_extension(image.mimeType)
                 file_name = f"{image_index}{extension}"
@@ -782,6 +791,14 @@ class GLTF2(Property):
 
                 with open(image_path, "wb") as f:
                     f.write(data[bufferView.byteOffset:bufferView.byteOffset + bufferView.byteLength])
+
+                bufferViewIndex = image.bufferView
+                # remove data from buffer
+                self.remove_data_from_buffer(bufferView.byteOffset, bufferView.byteLength)
+                # remove bufferview. Reduce larger bufferview indices by 1
+                self.remove_bufferView(bufferViewIndex)
+                # remove bufferview because uri and bufferview in one image element is invalid
+                image.bufferView = None
                 return file_name
             return None
         elif image.uri.startswith('data:'):
@@ -826,15 +843,29 @@ class GLTF2(Property):
                             image.name = copy.copy(image.uri) if not image.name else image.name
                             image.uri = f'data:{mime};base64,{encoded_string}'
                 elif image.bufferView is not None:
-                    # TODO: remove bufferView from GLTF when create images or datauris from buffer data
-                    warnings.warn("pygltflib currently does not remove image data "
-                                  "from the buffer when converting to data uri."
-                                  "Please open an issue at https://gitlab.com/dodgyville/pygltflib/issues")
-                    data = self.binary_blob()
                     bufferView = self.bufferViews[image.bufferView]
+                    data = self.binary_blob()
+                    rearrangeBuffer = True
+                    # if data is none search for buffer as uri
+                    if data is None:
+                        data = self.get_data_from_buffer_uri(self.buffers[bufferView.buffer].uri)
+                        rearrangeBuffer = False
+                        # bufferViewIndex = image.bufferView
+                    if data is None:
+                        warnings.warn(f"Expected image data in Buffer {bufferView.buffer} not found.")
+                        return
+                    bufferViewIndex = image.bufferView
                     image_data = data[bufferView.byteOffset:bufferView.byteOffset + bufferView.byteLength]
                     encoded_string = str(base64.b64encode(image_data).decode('utf-8'))
                     image.uri = f'data:{image.mimeType};base64,{encoded_string}'
+                    # remove data from buffer
+                    if rearrangeBuffer:
+                        self.remove_data_from_buffer(bufferView.byteOffset, bufferView.byteLength)
+                    # remove bufferview.
+                    self.remove_bufferView(bufferViewIndex)
+                    # remove bufferview because uri and bufferview in one image element is invalid
+                    image.bufferView = None
+
                 else:
                     warnings.warn(f"Image {image_index} appears to have neither a uri nor a buffer view.")
 
