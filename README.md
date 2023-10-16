@@ -285,11 +285,18 @@ We are very interested in hearing your use cases for `pygltflib` to help drive t
 * Neui
 * Bernhard Rainer
 * Philip Holzmann
+* Gabriel Unmüßig
+* Benjamin Renz
+
 
 #### Thanks
 `pygltflib` made for 'The Beat: A Glam Noir Game' supported by Film Victoria / VicScreen. 
 
 ### Changelog
+* 1.16.1:
+  * remove buffer data when converting images (Gabriel Unmüßig)
+  * make validator accept animation channel sampler = 0  (Benjamin Renz)
+
 * 1.16.0:
   * fix compile error by removing dead extension code
   * fix type hint in GLTF2.from_json() (Philip Holzmann)
