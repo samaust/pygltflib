@@ -1133,11 +1133,14 @@ class GLTF2(Property):
         version, length = struct.unpack("<II", data[4:12])
         if bytearray(magic) != MAGIC:
             raise IOError("Unable to load binary gltf file. Header does not appear to be valid glb format.")
-        if version > GLTF_MAX_VERSION:
-            warnings.warn(f"pygltflib supports v{GLTF_MAX_VERSION} of the binary gltf format, "
-                          "this file is version {version}, "
-                          "it may not import correctly. "
-                          "Please open an issue at https://gitlab.com/dodgyville/pygltflib/issues")
+        if version > GLTF_MAX_VERSION or version < GLTF_MIN_VERSION:
+            warnings.warn(
+                f"pygltflib does not support version strictly smaller than v{GLTF_MIN_VERSION} "
+                f"or strictly larger than v{GLTF_MAX_VERSION} of the binary gltf format, "
+                f"this file is version {version}, "
+                "it may not import correctly. "
+                "Please open an issue at https://gitlab.com/dodgyville/pygltflib/issues"
+            )
         index = 12
         i = 0
         obj = None
