@@ -1,6 +1,6 @@
 # pygltflib
 
-This is a library for reading, writing and handling GLTF files. It works for Python3.6 and above.
+This is a library for reading, writing and handling GLTF v2 files. It works for Python3.6 and above.
 
 It supports the entire specification, including materials and animations. Main features are:
 * GLB and GLTF support
@@ -18,6 +18,7 @@ It supports the entire specification, including materials and animations. Main f
     * [Load a file?](#load-a-file)
     * [Load a binary GLB file?](#load-a-binary-glb-file)
     * [Load a binary file with an unusual extension?](#load-a-binary-file-with-an-unusual-extension)
+    * [Load a B3DM file?](#load-a-b3dm-file)
     * [Access the first node (the objects comprising the scene) of a scene?](#access-the-first-node-the-objects-comprising-the-scene-of-a-scene)
     * [Create a mesh?](#create-a-mesh)
     * [Convert buffers to GLB binary buffers?](#convert-buffers-to-glb-binary-buffers)
@@ -101,6 +102,9 @@ glb = GLTF2().load(glb_filename)  # load method auto detects based on extension
 glb = GLTF2().load_binary("BinaryGLTF.glk")   # load_json and load_binary helper methods
 ```
 
+#### Load A B3DM file?
+.B3DM files are a deprecated format used by CesiumJS. They are a wrapper around a GLTF1 file. pygltflib only supports
+GLTF2 files. Please open an issue if this is important to you!
 
 #### Access the first node (the objects comprising the scene) of a scene?
 
@@ -287,12 +291,17 @@ We are very interested in hearing your use cases for `pygltflib` to help drive t
 * Philip Holzmann
 * Gabriel Unmüßig
 * Benjamin Renz
+* Raphael Delhome
 
 
 #### Thanks
 `pygltflib` made for 'The Beat: A Glam Noir Game' supported by Film Victoria / VicScreen. 
 
 ### Changelog
+* 1.16.2:
+  * add documentation about b3dm file format
+  * warn user if trying to load a GLTF v1 file (or any file outside the supported range) (Raphael Delhome)
+  
 * 1.16.1:
   * remove buffer data when converting images (Gabriel Unmüßig)
   * make validator accept animation channel sampler = 0  (Benjamin Renz)

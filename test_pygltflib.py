@@ -1075,3 +1075,4 @@ class TestAlignment:
 
         gltf.set_min_alignment(alignment)
         assert gltf.required_alignment() == expected_alignment
+
