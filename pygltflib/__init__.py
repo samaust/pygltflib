@@ -2,7 +2,7 @@
 pygltflib : A Python library for reading, writing and handling GLTF files.
 
 
-Copyright (c) 2018,2023 Luke Miller
+Copyright (c) 2018,2024 Luke Miller
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ from dataclasses_json import dataclass_json as dataclass_json
 from dataclasses_json.core import _decode_dataclass
 from dataclasses_json.core import _ExtendedEncoder as JsonEncoder
 
-__version__ = "1.16.2"
+__version__ = "1.16.3"
 
 """
 About the GLTF2 file format:
@@ -633,7 +633,7 @@ class GLTF2(Property):
             if len(self.buffers) > 1:
                 warnings.warn("GLTF has multiple buffers but only one buffer binary blob, pygltflib might corrupt data."
                               "Please open an issue at https://gitlab.com/dodgyville/pygltflib/issues")
-        elif uri.startswith("data"):
+        elif uri.startswith("data:"):
             uri_format = BufferFormat.DATAURI
         elif Path(path, uri).is_file():
             uri_format = BufferFormat.BINFILE
@@ -1023,7 +1023,7 @@ class GLTF2(Property):
                 if binary_blob is None:
                     binary_blob = self.binary_blob()
                 data = binary_blob
-            elif buffer.uri.startswith("data"):
+            elif buffer.uri.startswith("data:"):
                 data = self.decode_data_uri(buffer.uri)
             elif Path(path, buffer.uri).is_file():
                 with open(Path(path, buffer.uri), 'rb') as fb:
@@ -1123,8 +1123,11 @@ class GLTF2(Property):
 
     @classmethod
     def load_json(cls, fname):
+        path = Path(fname)
         with open(fname, "r") as f:
             obj = cls.gltf_from_json(f.read())
+        obj._path = path.parent
+        obj._name = path.name
         return obj
 
     @classmethod
@@ -1163,9 +1166,13 @@ class GLTF2(Property):
 
     @classmethod
     def load_binary(cls, fname):
+        path = Path(fname)
         with open(fname, "rb") as f:
             data = f.read()
-        return cls.load_from_bytes(data)
+        obj = cls.load_from_bytes(data)
+        obj._path = path.parent
+        obj._name = path.name
+        return obj
 
     @classmethod
     def load_binary_from_file_object(cls, f):
@@ -1180,8 +1187,6 @@ class GLTF2(Property):
             obj = cls.load_binary(fname)
         else:
             obj = cls.load_json(fname)
-        obj._path = path.parent
-        obj._name = path.name
         return obj
 
 

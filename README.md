@@ -298,6 +298,10 @@ We are very interested in hearing your use cases for `pygltflib` to help drive t
 `pygltflib` made for 'The Beat: A Glam Noir Game' supported by Film Victoria / VicScreen. 
 
 ### Changelog
+* 1.16.3:
+  * correctly identify URIs pointing to file paths that start with "data" (Yi Liu)
+  * `load_binary` and `load_json` now set object _name and _path to align with `load` method functionality (Johannes Pieger)  
+
 * 1.16.2:
   * add documentation about b3dm file format
   * warn user if trying to load a GLTF v1 file (or any file outside the supported range) (Raphael Delhome)
