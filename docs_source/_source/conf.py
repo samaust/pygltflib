@@ -15,7 +15,8 @@ author = 'Samuel Austin'
 
 extensions = [
     'sphinx_rtd_theme',
-    'sphinx.ext.autodoc'
+    'sphinx.ext.autodoc',
+    "sphinx.ext.githubpages"
 ]
 
 templates_path = ['_templates']
