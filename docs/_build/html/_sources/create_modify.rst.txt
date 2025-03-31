@@ -1,4 +1,0 @@
-Create and modify a GLTF2 Object
-================================
-
-nbrfg
