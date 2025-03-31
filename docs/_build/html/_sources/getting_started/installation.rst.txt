@@ -1,0 +1,6 @@
+Installation
+============
+
+   .. prompt:: bash
+
+    pip install git+https://github.com/samaust/pygltflib.git

@@ -1,0 +1,48 @@
+Gettings started
+================
+
+Create an empty GLTF2 object
+----------------------------
+
+.. code-block:: python
+from pygltflib import GLTF2
+
+gltf = GLTF2()
+
+code
+
+Add a scene
+-----------
+
+
+
+
+Access the first node (the objects comprising the scene) of a scene
+
+
+
+Create a mesh
+
+
+
+
+Access an extension
+
+
+
+
+Add a custom attribute to Attributes
+
+
+
+
+Remove a bufferView
+
+
+
+
+
+
+
+
+

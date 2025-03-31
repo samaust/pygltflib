@@ -8,6 +8,26 @@ It supports the entire specification, including materials and animations. Main f
 * Extensions
 * All attributes are type-hinted
 
+# About the fork
+
+The GLTF2 class was split into multiple classes to separate the various actions done on the data to their own classes. The methods intended to be called by the users are on the class GLTF2. All other methods were moved to other files and classes.
+
+This was done as a learning experience in refactoring a python package. I don't intend to provide long term support and improvements.
+
+This package currently has the same name and version as the official pygltflib so only one of them can be installed at a time.
+
+All the tests in test_pygltflib.py are PASSING.
+
+glb binary files with data in chunks after the binary buffer are unsupported.
+
+* Changes :
+  * Not required attributes are initialized to None. The default values are shown in the comments of pygltflib.v2.schema.
+  * Required attributes need to be set in the constructor.
+  * Constants are moved into Enums.
+  * Comments above the dataclasses in pygltflib.v2.schema give the references to the glTF™ 2.0 Specification.
+  * There are some minor breaking changes that require code updates to work. The examples below are not all updated and might not work.
+  * Sphinx Documentation.
+
 # Table of Contents
 
 * [Quickstart](#quickstart)
@@ -365,66 +385,79 @@ https://github.com/KhronosGroup/glTF-Sample-Models
 
 ### A simple mesh
 ```python
-from pygltflib import *
+from pygltflib import GLTF2
+from pygltflib.v2.schema import (
+    Accessor,
+    Accessor_componentType,
+    Accessor_type,
+    Attributes,
+    Buffer,
+    BufferView,
+    BufferView_target,
+    Mesh,
+    MeshPrimitive,
+    Node,
+    Scene
+)
 
-# create gltf objects for a scene with a primitive triangle with indexed geometry
+# Create a gltf object
 gltf = GLTF2()
-scene = Scene()
+
+# Create data
+accessor1 = Accessor(
+    bufferView = 0,
+    byteOffset = 0,
+    componentType = Accessor_componentType.UNSIGNED_SHORT.value,
+    count = 3,
+    type = Accessor_type.SCALAR.value,
+    max = [2],
+    min = [0]
+)
+accessor2 = Accessor(
+    bufferView = 1,
+    byteOffset = 0,
+    componentType = Accessor_componentType.FLOAT.value,
+    count = 3,
+    type = Accessor_type.VEC3.value,
+    max = [1.0, 1.0, 0.0],
+    min = [0.0, 0.0, 0.0]
+)
+buffer = Buffer(
+    uri = "data:application/octet-stream;base64,AAABAAIAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAA=",
+    byteLength = 44
+)
+bufferView1 = BufferView(
+    buffer = 0,
+    byteOffset = 0,
+    byteLength = 6,
+    target = BufferView_target.ELEMENT_ARRAY_BUFFER.value
+)
+bufferView2 = BufferView(
+    buffer = 0,
+    byteOffset = 8,
+    byteLength = 36,
+    target = BufferView_target.ARRAY_BUFFER.value
+)
+primitive = MeshPrimitive(
+    attributes = Attributes(POSITION = 1)
+)
 mesh = Mesh()
-primitive = Primitive()
-node = Node()
-buffer = Buffer()
-bufferView1 = BufferView()
-bufferView2 = BufferView()
-accessor1 = Accessor()
-accessor2 = Accessor()
+mesh.primitives.append(primitive)
+node = Node(mesh = 0)
+scene = Scene(nodes = [0])
 
-# add data
-buffer.uri = "data:application/octet-stream;base64,AAABAAIAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAA="
-buffer.byteLength = 44
-
-bufferView1.buffer = 0
-bufferView1.byteOffset = 0
-bufferView1.byteLength = 6
-bufferView1.target = ELEMENT_ARRAY_BUFFER
-
-bufferView2.buffer = 0
-bufferView2.byteOffset = 8
-bufferView2.byteLength = 36
-bufferView2.target = ARRAY_BUFFER
-
-accessor1.bufferView = 0
-accessor1.byteOffset = 0
-accessor1.componentType = UNSIGNED_SHORT
-accessor1.count = 3
-accessor1.type = SCALAR
-accessor1.max = [2]
-accessor1.min = [0]
-
-accessor2.bufferView = 1
-accessor2.byteOffset = 0
-accessor2.componentType = FLOAT
-accessor2.count = 3
-accessor2.type = VEC3
-accessor2.max = [1.0, 1.0, 0.0]
-accessor2.min = [0.0, 0.0, 0.0]
-
-primitive.attributes.POSITION = 1
-node.mesh = 0
-scene.nodes = [0]
-
-# assemble into a gltf structure
-gltf.scenes.append(scene)
-gltf.meshes.append(mesh)
-gltf.meshes[0].primitives.append(primitive)
-gltf.nodes.append(node)
+# Assemble into a gltf structure
+gltf.accessors.append(accessor1)
+gltf.accessors.append(accessor2)
 gltf.buffers.append(buffer)
 gltf.bufferViews.append(bufferView1)
 gltf.bufferViews.append(bufferView2)
-gltf.accessors.append(accessor1)
-gltf.accessors.append(accessor2)
+gltf.meshes.append(mesh)
+gltf.nodes.append(node)
+gltf.scene = 0
+gltf.scenes.append(scene)
 
-# save to file
+# Save to file
 gltf.save("triangle.gltf")
 ```
 
@@ -452,7 +485,7 @@ for primitive in mesh.primitives:
     accessor = gltf.accessors[primitive.attributes.POSITION]
     bufferView = gltf.bufferViews[accessor.bufferView]
     buffer = gltf.buffers[bufferView.buffer]
-    data = gltf.get_data_from_buffer_uri(buffer.uri)
+    data = gltf.get_data_from_uri(buffer.uri)
 
     # pull each vertex from the binary buffer and convert it into a tuple of python floats
     vertices = []

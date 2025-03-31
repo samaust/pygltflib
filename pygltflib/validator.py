@@ -1,8 +1,17 @@
-from . import *
+import warnings
+
+from pygltflib import GLTF2
+from pygltflib.v2.schema import (
+    ACCESSOR_COMPONENT_TYPES,
+    ACCESSOR_SPARSE_INDICES_COMPONENT_TYPES,
+    BUFFERVIEW_TARGETS,
+    MESH_PRIMITIVE_MODES
+)
 
 ###
 # Validator
 ###
+
 
 class GLTFValidatorException(Exception):
     pass
@@ -47,7 +56,7 @@ class MissingRequiredField(GLTFValidatorException):
 def validate_accessors(gltf: GLTF2):
     # pretty complete
     for accessor in gltf.accessors:
-        if accessor.componentType not in COMPONENT_TYPES:
+        if accessor.componentType not in ACCESSOR_COMPONENT_TYPES:
             raise InvalidAcccessorComponentTypeException(f"{accessor.componentType} not a valid component type")
         if accessor.max and len(accessor.max) not in [1, 2, 3, 4, 9, 16]:
             raise InvalidArrayLengthException(f"{len(accessor.max)} not a valid length for accessor max array")
@@ -115,11 +124,13 @@ def validate(gltf: GLTF2, warning=False):
           warning (Bool): If false, all errors throw exceptions, else
 
     Returns:
-         errors List(Exception): A list of errors if warning is True, or an empty list validated correctly
+         errors list(Exception): A list of errors if warning is True, or an empty list validated correctly
     """
     errors = []
     warnings.warn("pygltf.utils.validator is a provisional function and may not exist in future versions.")
-    for validator in [validate_accessors, validate_accessors_sparse, validate_animation_channel, validate_meshes, validate_bufferViews]:
+    for validator in [validate_accessors, validate_accessors_sparse,
+                      validate_animation_channel, validate_meshes,
+                      validate_bufferViews]:
         try:
             validator(gltf)
         except Exception as e:

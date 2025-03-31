@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pygltflib documentation &mdash; pygltflib  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="quickstart/installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            pygltflib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Quickstart</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart/installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="actions/general.html">General</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actions/load.html">Load</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actions/save.html">Save</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actions/convert.html">Convert</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actions/export.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actions/validate.html">Validate</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/modules.html">modules</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">about</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pygltflib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pygltflib documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pygltflib-documentation">
+<h1>pygltflib documentation<a class="headerlink" href="#pygltflib-documentation" title="Link to this heading"></a></h1>
+<p>This is a fork of pygltflib, a library for reading, writing and handling GLTF v2 files. It is compatible with Python 3.10 and above.</p>
+<p>It supports the entire specification, including materials and animations. Main features are:</p>
+<ul class="simple">
+<li><p>GLB and GLTF support</p></li>
+<li><p>Buffer data conversion</p></li>
+<li><p>Extensions</p></li>
+<li><p>All attributes are type-hinted</p></li>
+</ul>
+<section id="about-the-fork">
+<h2>About the fork<a class="headerlink" href="#about-the-fork" title="Link to this heading"></a></h2>
+<p>The GLTF2 class was split into multiple classes to separate the various actions done on the data to their own classes. The methods intended to be called by the users are on the class GLTF2. All other methods were moved to other files and classes.</p>
+<p>This was done as a learning experience in refactoring a python package. I don’t intend to provide long term support and improvements.</p>
+<p>This package currently has the same name and version as the official pygltflib so only one of them can be installed at a time.</p>
+<p>All the tests in test_pygltflib.py are PASSING.</p>
+<p>glb binary files with data in chunks after the binary buffer are unsupported.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Changes :</dt><dd><ul>
+<li><p>Not required attributes are initialized to None. The default values are shown in the comments of pygltflib.v2.schema.</p></li>
+<li><p>Required attributes need to be set in the constructor.</p></li>
+<li><p>Constants are moved into Enums.</p></li>
+<li><p>Comments above the dataclasses in pygltflib.v2.schema give the references to the glTF™ 2.0 Specification.</p></li>
+<li><p>There are some minor breaking changes that require code updates to work. The examples are not all updated and might not work.</p></li>
+<li><p>Sphinx Documentation.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="overview-of-gltf2-class">
+<h2>Overview of GLTF2 class<a class="headerlink" href="#overview-of-gltf2-class" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>GLTF2Data Properties</dt><dd><ul>
+<li><p>JSON</p></li>
+<li><p>BIN</p></li>
+<li><p>CHUNKS</p></li>
+<li><p>path_dir</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>GLTF2JSON Properties</dt><dd><ul>
+<li><p>extensionsUsed</p></li>
+<li><p>extensionsRequired</p></li>
+<li><p>accessors</p></li>
+<li><p>animations</p></li>
+<li><p>asset</p></li>
+<li><p>buffers</p></li>
+<li><p>bufferViews</p></li>
+<li><p>cameras</p></li>
+<li><p>images</p></li>
+<li><p>materials</p></li>
+<li><p>meshes</p></li>
+<li><p>nodes</p></li>
+<li><p>samplers</p></li>
+<li><p>scene</p></li>
+<li><p>scenes</p></li>
+<li><p>skins</p></li>
+<li><p>textures</p></li>
+<li><p>extensions</p></li>
+<li><p>extras</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>High level methods</dt><dd><ul>
+<li><p>convert_buffers</p></li>
+<li><p>convert_images</p></li>
+<li><p>export_image</p></li>
+<li><p>load</p></li>
+<li><p>save</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Low level methods</dt><dd><ul>
+<li><p>identify_uri</p></li>
+<li><p>get_data_from_buffer_uri</p></li>
+<li><p>get_data_from_buffer_index</p></li>
+<li><p>gltf_from_json</p></li>
+<li><p>gltf_to_json</p></li>
+<li><p>get_bin_name_from_path</p></li>
+<li><p>remove_bufferView</p></li>
+<li><p>load_binary</p></li>
+<li><p>load_from_bytes</p></li>
+<li><p>save_binary</p></li>
+<li><p>save_to_bytes</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Quickstart</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart/installation.html">Installation</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">How-to guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="actions/general.html">General</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#create-an-empty-gltf2-object">Create an empty GLTF2 object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#create-a-gltf2-object-from-an-existing-gltf2-object">Create a GLTF2 object from an existing GLTF2 object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#add-a-scene">Add a scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#access-the-first-node-the-objects-comprising-the-scene-of-a-scene">Access the first node (the objects comprising the scene) of a scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#access-an-extension">Access an extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#add-a-custom-attribute-to-attributes">Add a custom attribute to Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#remove-a-bufferview">Remove a bufferView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#create-a-simple-mesh">Create a simple mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#reading-vertex-data-from-a-primitive-and-or-getting-bounding-sphere">Reading vertex data from a primitive and/or getting bounding sphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/general.html#create-a-mesh-convert-to-bytes-convert-back-to-mesh">Create a mesh, convert to bytes, convert back to mesh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="actions/load.html">Load</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="actions/load.html#load-a-gltf-file">Load a .gltf file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/load.html#load-a-binary-glb-file">Load a binary .glb file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/load.html#load-a-binary-file-with-an-unusual-extension">Load a binary file with an unusual extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/load.html#load-a-b3dm-file">Load a B3DM file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="actions/save.html">Save</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="actions/save.html#save-a-gltf-file">Save a .gltf file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/save.html#save-a-glb-file">Save a .glb file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/save.html#convert-a-glb-to-a-gltf-file">Convert a glb to a gltf file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions/save.html#convert-a-gltf-to-a-glb-file">Convert a gltf to a glb file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="actions/convert.html">Convert</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actions/export.html">Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actions/validate.html">Validate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="actions/validate.html#pyglftlib-validator">pyglftlib validator</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Code documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/modules.html">modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/pygltflib.html">pygltflib package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/pygltflib.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/pygltflib.html#module-pygltflib.exceptions">pygltflib.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/pygltflib.html#module-pygltflib.utils">pygltflib.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/pygltflib.html#module-pygltflib.validator">pygltflib.validator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/pygltflib.html#module-pygltflib">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">about</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickstart/installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Samuel Austin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

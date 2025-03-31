@@ -1,0 +1,759 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pygltflib package &mdash; pygltflib  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pygltflib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pygltflib package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pygltflib.exceptions">pygltflib.exceptions module</a><ul>
+<li><a class="reference internal" href="#pygltflib.exceptions.FileEmptyError"><code class="docutils literal notranslate"><span class="pre">FileEmptyError</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.exceptions.InvalidBufferFormat"><code class="docutils literal notranslate"><span class="pre">InvalidBufferFormat</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.exceptions.InvalidImageFormat"><code class="docutils literal notranslate"><span class="pre">InvalidImageFormat</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.exceptions.LoadSourceEmptyError"><code class="docutils literal notranslate"><span class="pre">LoadSourceEmptyError</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.exceptions.NotImplementedError"><code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.exceptions.SaveDestinationEmptyError"><code class="docutils literal notranslate"><span class="pre">SaveDestinationEmptyError</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.exceptions.ValidationError"><code class="docutils literal notranslate"><span class="pre">ValidationError</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pygltflib.utils">pygltflib.utils module</a><ul>
+<li><a class="reference internal" href="#pygltflib.utils.add_camera"><code class="docutils literal notranslate"><span class="pre">add_camera()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.add_default_camera"><code class="docutils literal notranslate"><span class="pre">add_default_camera()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.add_default_scene"><code class="docutils literal notranslate"><span class="pre">add_default_scene()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.add_indexed_geometry"><code class="docutils literal notranslate"><span class="pre">add_indexed_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.add_node"><code class="docutils literal notranslate"><span class="pre">add_node()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.add_primitive"><code class="docutils literal notranslate"><span class="pre">add_primitive()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.find_node_index_by_name"><code class="docutils literal notranslate"><span class="pre">find_node_index_by_name()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.get_accessor_for_bufferview"><code class="docutils literal notranslate"><span class="pre">get_accessor_for_bufferview()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.get_bufferview_for_accessor"><code class="docutils literal notranslate"><span class="pre">get_bufferview_for_accessor()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.glb2gltf"><code class="docutils literal notranslate"><span class="pre">glb2gltf()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.gltf2glb"><code class="docutils literal notranslate"><span class="pre">gltf2glb()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.indices_and_vertices_to_gltf"><code class="docutils literal notranslate"><span class="pre">indices_and_vertices_to_gltf()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.unpackURI"><code class="docutils literal notranslate"><span class="pre">unpackURI()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.utils.uri2vectors"><code class="docutils literal notranslate"><span class="pre">uri2vectors()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pygltflib.validator">pygltflib.validator module</a><ul>
+<li><a class="reference internal" href="#pygltflib.validator.GLTFValidatorException"><code class="docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.InvalidAcccessorComponentTypeException"><code class="docutils literal notranslate"><span class="pre">InvalidAcccessorComponentTypeException</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.InvalidAccessorSparseIndicesComponentTypeException"><code class="docutils literal notranslate"><span class="pre">InvalidAccessorSparseIndicesComponentTypeException</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.InvalidArrayLengthException"><code class="docutils literal notranslate"><span class="pre">InvalidArrayLengthException</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.InvalidBufferViewIndex"><code class="docutils literal notranslate"><span class="pre">InvalidBufferViewIndex</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.InvalidBufferViewTarget"><code class="docutils literal notranslate"><span class="pre">InvalidBufferViewTarget</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.InvalidMeshPrimitiveMode"><code class="docutils literal notranslate"><span class="pre">InvalidMeshPrimitiveMode</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.InvalidValueError"><code class="docutils literal notranslate"><span class="pre">InvalidValueError</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.MismatchedArrayLengthException"><code class="docutils literal notranslate"><span class="pre">MismatchedArrayLengthException</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.MissingRequiredField"><code class="docutils literal notranslate"><span class="pre">MissingRequiredField</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.summary"><code class="docutils literal notranslate"><span class="pre">summary()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.validate"><code class="docutils literal notranslate"><span class="pre">validate()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.validate_accessors"><code class="docutils literal notranslate"><span class="pre">validate_accessors()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.validate_accessors_sparse"><code class="docutils literal notranslate"><span class="pre">validate_accessors_sparse()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.validate_animation_channel"><code class="docutils literal notranslate"><span class="pre">validate_animation_channel()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.validate_bufferViews"><code class="docutils literal notranslate"><span class="pre">validate_bufferViews()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.validator.validate_meshes"><code class="docutils literal notranslate"><span class="pre">validate_meshes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pygltflib">Module contents</a><ul>
+<li><a class="reference internal" href="#pygltflib.GLTF2"><code class="docutils literal notranslate"><span class="pre">GLTF2</span></code></a><ul>
+<li><a class="reference internal" href="#pygltflib.GLTF2.BIN"><code class="docutils literal notranslate"><span class="pre">GLTF2.BIN</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.CHUNKS"><code class="docutils literal notranslate"><span class="pre">GLTF2.CHUNKS</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.JSON"><code class="docutils literal notranslate"><span class="pre">GLTF2.JSON</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.accessors"><code class="docutils literal notranslate"><span class="pre">GLTF2.accessors</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.animations"><code class="docutils literal notranslate"><span class="pre">GLTF2.animations</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.asset"><code class="docutils literal notranslate"><span class="pre">GLTF2.asset</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.bufferViews"><code class="docutils literal notranslate"><span class="pre">GLTF2.bufferViews</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.buffers"><code class="docutils literal notranslate"><span class="pre">GLTF2.buffers</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.cameras"><code class="docutils literal notranslate"><span class="pre">GLTF2.cameras</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.convert_buffers"><code class="docutils literal notranslate"><span class="pre">GLTF2.convert_buffers()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.convert_images"><code class="docutils literal notranslate"><span class="pre">GLTF2.convert_images()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.export_image"><code class="docutils literal notranslate"><span class="pre">GLTF2.export_image()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.extensions"><code class="docutils literal notranslate"><span class="pre">GLTF2.extensions</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.extensionsRequired"><code class="docutils literal notranslate"><span class="pre">GLTF2.extensionsRequired</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.extensionsUsed"><code class="docutils literal notranslate"><span class="pre">GLTF2.extensionsUsed</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.extras"><code class="docutils literal notranslate"><span class="pre">GLTF2.extras</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.get_bin_name_from_path"><code class="docutils literal notranslate"><span class="pre">GLTF2.get_bin_name_from_path()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.get_data_from_buffer_index"><code class="docutils literal notranslate"><span class="pre">GLTF2.get_data_from_buffer_index()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.get_data_from_buffer_uri"><code class="docutils literal notranslate"><span class="pre">GLTF2.get_data_from_buffer_uri()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.gltf_from_json"><code class="docutils literal notranslate"><span class="pre">GLTF2.gltf_from_json()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.gltf_to_json"><code class="docutils literal notranslate"><span class="pre">GLTF2.gltf_to_json()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.identify_uri"><code class="docutils literal notranslate"><span class="pre">GLTF2.identify_uri()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.images"><code class="docutils literal notranslate"><span class="pre">GLTF2.images</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.load"><code class="docutils literal notranslate"><span class="pre">GLTF2.load()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.load_binary"><code class="docutils literal notranslate"><span class="pre">GLTF2.load_binary()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.load_from_bytes"><code class="docutils literal notranslate"><span class="pre">GLTF2.load_from_bytes()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.materials"><code class="docutils literal notranslate"><span class="pre">GLTF2.materials</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.meshes"><code class="docutils literal notranslate"><span class="pre">GLTF2.meshes</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.nodes"><code class="docutils literal notranslate"><span class="pre">GLTF2.nodes</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.path_dir"><code class="docutils literal notranslate"><span class="pre">GLTF2.path_dir</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.remove_bufferView"><code class="docutils literal notranslate"><span class="pre">GLTF2.remove_bufferView()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.samplers"><code class="docutils literal notranslate"><span class="pre">GLTF2.samplers</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.save"><code class="docutils literal notranslate"><span class="pre">GLTF2.save()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.save_binary"><code class="docutils literal notranslate"><span class="pre">GLTF2.save_binary()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.save_to_bytes"><code class="docutils literal notranslate"><span class="pre">GLTF2.save_to_bytes()</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.scene"><code class="docutils literal notranslate"><span class="pre">GLTF2.scene</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.scenes"><code class="docutils literal notranslate"><span class="pre">GLTF2.scenes</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.skins"><code class="docutils literal notranslate"><span class="pre">GLTF2.skins</span></code></a></li>
+<li><a class="reference internal" href="#pygltflib.GLTF2.textures"><code class="docutils literal notranslate"><span class="pre">GLTF2.textures</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pygltflib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pygltflib package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pygltflib.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pygltflib-package">
+<h1>pygltflib package<a class="headerlink" href="#pygltflib-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pygltflib.exceptions">
+<span id="pygltflib-exceptions-module"></span><h2>pygltflib.exceptions module<a class="headerlink" href="#module-pygltflib.exceptions" title="Link to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.exceptions.FileEmptyError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.exceptions.</span></span><span class="sig-name descname"><span class="pre">FileEmptyError</span></span><a class="headerlink" href="#pygltflib.exceptions.FileEmptyError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.exceptions.InvalidBufferFormat">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidBufferFormat</span></span><a class="headerlink" href="#pygltflib.exceptions.InvalidBufferFormat" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.exceptions.InvalidImageFormat">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidImageFormat</span></span><a class="headerlink" href="#pygltflib.exceptions.InvalidImageFormat" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.exceptions.LoadSourceEmptyError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.exceptions.</span></span><span class="sig-name descname"><span class="pre">LoadSourceEmptyError</span></span><a class="headerlink" href="#pygltflib.exceptions.LoadSourceEmptyError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.exceptions.NotImplementedError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.exceptions.</span></span><span class="sig-name descname"><span class="pre">NotImplementedError</span></span><a class="headerlink" href="#pygltflib.exceptions.NotImplementedError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.exceptions.SaveDestinationEmptyError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.exceptions.</span></span><span class="sig-name descname"><span class="pre">SaveDestinationEmptyError</span></span><a class="headerlink" href="#pygltflib.exceptions.SaveDestinationEmptyError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.exceptions.ValidationError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.exceptions.</span></span><span class="sig-name descname"><span class="pre">ValidationError</span></span><a class="headerlink" href="#pygltflib.exceptions.ValidationError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-pygltflib.utils">
+<span id="pygltflib-utils-module"></span><h2>pygltflib.utils module<a class="headerlink" href="#module-pygltflib.utils" title="Link to this heading"></a></h2>
+<p>pygltflib.utils.py : A collection of functions for manipulating GLTF2 objects.</p>
+<p>Copyright (c) 2018, 2019 Luke Miller</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.add_camera">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">add_camera</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.add_camera" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.add_default_camera">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">add_default_camera</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.add_default_camera" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.add_default_scene">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">add_default_scene</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.add_default_scene" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.add_indexed_geometry">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">add_indexed_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.add_indexed_geometry" title="Link to this definition"></a></dt>
+<dd><p>Add a primitive object to the GLTF that is a list of indices and vertices.
+eg a triangle with indices [(0, 1, 2)] and 
+vertices [(0.0, 0.0, 0.0), (1.0, 0.0, 0.0), (0.0, 1.0, 0.0)]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.add_node">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">add_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.add_node" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.add_primitive">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">add_primitive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_gltf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.add_primitive" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.find_node_index_by_name">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">find_node_index_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pygltflib.GLTF2" title="pygltflib.v2.GLTF2"><span class="pre">GLTF2</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.find_node_index_by_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.get_accessor_for_bufferview">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">get_accessor_for_bufferview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bufferview</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.get_accessor_for_bufferview" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.get_bufferview_for_accessor">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">get_bufferview_for_accessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accessor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.get_bufferview_for_accessor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.glb2gltf">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">glb2gltf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.glb2gltf" title="Link to this definition"></a></dt>
+<dd><p>Save a .glb file as its .gltf equivalent.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>source (str): Path to existing .glb file.
+destination (Optional(str)): Filename to write to (default is to use existing filename as base). optional  # noqa: E501
+override (bool): Override existing file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.gltf2glb">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">gltf2glb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.gltf2glb" title="Link to this definition"></a></dt>
+<dd><p>Save a .gltf file as its .glb equivalent.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>source (str): Path to existing .gltf file.
+destination (Optional(str)): Filename to write to (default is to use existing filename as base). optional.  # noqa: E501
+override (bool): Override existing file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.indices_and_vertices_to_gltf">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">indices_and_vertices_to_gltf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.indices_and_vertices_to_gltf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.unpackURI">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">unpackURI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.unpackURI" title="Link to this definition"></a></dt>
+<dd><p>Unpack a data uri of a primitive with indexed geometry</p>
+<dl>
+<dt>Args:</dt><dd><p>gltf (GLTF2): a gltf object containing indexed geometry
+buffer_index: the index pointing to the buffer to unpack in</p>
+<blockquote>
+<div><p>gltf.buffers</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>indices, vertices (list(Any)): List of indices that point to elements
+in the list of vertices (also returned)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.utils.uri2vectors">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.utils.</span></span><span class="sig-name descname"><span class="pre">uri2vectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.utils.uri2vectors" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pygltflib.validator">
+<span id="pygltflib-validator-module"></span><h2>pygltflib.validator module<a class="headerlink" href="#module-pygltflib.validator" title="Link to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.GLTFValidatorException">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">GLTFValidatorException</span></span><a class="headerlink" href="#pygltflib.validator.GLTFValidatorException" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.InvalidAcccessorComponentTypeException">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">InvalidAcccessorComponentTypeException</span></span><a class="headerlink" href="#pygltflib.validator.InvalidAcccessorComponentTypeException" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.InvalidAccessorSparseIndicesComponentTypeException">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">InvalidAccessorSparseIndicesComponentTypeException</span></span><a class="headerlink" href="#pygltflib.validator.InvalidAccessorSparseIndicesComponentTypeException" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.InvalidArrayLengthException">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">InvalidArrayLengthException</span></span><a class="headerlink" href="#pygltflib.validator.InvalidArrayLengthException" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.InvalidBufferViewIndex">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">InvalidBufferViewIndex</span></span><a class="headerlink" href="#pygltflib.validator.InvalidBufferViewIndex" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.InvalidBufferViewTarget">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">InvalidBufferViewTarget</span></span><a class="headerlink" href="#pygltflib.validator.InvalidBufferViewTarget" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.InvalidMeshPrimitiveMode">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">InvalidMeshPrimitiveMode</span></span><a class="headerlink" href="#pygltflib.validator.InvalidMeshPrimitiveMode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.InvalidValueError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">InvalidValueError</span></span><a class="headerlink" href="#pygltflib.validator.InvalidValueError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.MismatchedArrayLengthException">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">MismatchedArrayLengthException</span></span><a class="headerlink" href="#pygltflib.validator.MismatchedArrayLengthException" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pygltflib.validator.MissingRequiredField">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">MissingRequiredField</span></span><a class="headerlink" href="#pygltflib.validator.MissingRequiredField" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygltflib.validator.GLTFValidatorException" title="pygltflib.validator.GLTFValidatorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">GLTFValidatorException</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.validator.summary">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pygltflib.GLTF2" title="pygltflib.v2.GLTF2"><span class="pre">GLTF2</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.validator.summary" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.validator.validate">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pygltflib.GLTF2" title="pygltflib.v2.GLTF2"><span class="pre">GLTF2</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.validator.validate" title="Link to this definition"></a></dt>
+<dd><p>Validate a GLTF2 object. Will raises exceptions where validation fails.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>gltf (GLTF2): A gltf2 object
+warning (Bool): If false, all errors throw exceptions, else</p>
+</dd>
+<dt>Returns:</dt><dd><p>errors list(Exception): A list of errors if warning is True, or an empty list validated correctly</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.validator.validate_accessors">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">validate_accessors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pygltflib.GLTF2" title="pygltflib.v2.GLTF2"><span class="pre">GLTF2</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.validator.validate_accessors" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.validator.validate_accessors_sparse">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">validate_accessors_sparse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pygltflib.GLTF2" title="pygltflib.v2.GLTF2"><span class="pre">GLTF2</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.validator.validate_accessors_sparse" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.validator.validate_animation_channel">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">validate_animation_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pygltflib.GLTF2" title="pygltflib.v2.GLTF2"><span class="pre">GLTF2</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.validator.validate_animation_channel" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.validator.validate_bufferViews">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">validate_bufferViews</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pygltflib.GLTF2" title="pygltflib.v2.GLTF2"><span class="pre">GLTF2</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.validator.validate_bufferViews" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygltflib.validator.validate_meshes">
+<span class="sig-prename descclassname"><span class="pre">pygltflib.validator.</span></span><span class="sig-name descname"><span class="pre">validate_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gltf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pygltflib.GLTF2" title="pygltflib.v2.GLTF2"><span class="pre">GLTF2</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.validator.validate_meshes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pygltflib">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pygltflib" title="Link to this heading"></a></h2>
+<p>pygltflib : A Python library for reading, writing and handling GLTF files.</p>
+<p>Copyright (c) 2018,2024 Luke Miller</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pygltflib.GLTF2">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygltflib.</span></span><span class="sig-name descname"><span class="pre">GLTF2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">JSON</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GLTF2JSON</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BIN</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CHUNKS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('.')</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to process .gltf, .glb and .bin files.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.BIN">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BIN</span></span><a class="headerlink" href="#pygltflib.GLTF2.BIN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.CHUNKS">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CHUNKS</span></span><a class="headerlink" href="#pygltflib.GLTF2.CHUNKS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.JSON">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">JSON</span></span><a class="headerlink" href="#pygltflib.GLTF2.JSON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.accessors">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessors</span></span><a class="headerlink" href="#pygltflib.GLTF2.accessors" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.animations">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">animations</span></span><a class="headerlink" href="#pygltflib.GLTF2.animations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.asset">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">asset</span></span><a class="headerlink" href="#pygltflib.GLTF2.asset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.bufferViews">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bufferViews</span></span><a class="headerlink" href="#pygltflib.GLTF2.bufferViews" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.buffers">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">buffers</span></span><a class="headerlink" href="#pygltflib.GLTF2.buffers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.cameras">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cameras</span></span><a class="headerlink" href="#pygltflib.GLTF2.cameras" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.convert_buffers">
+<span class="sig-name descname"><span class="pre">convert_buffers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BufferFormat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.convert_buffers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.convert_images">
+<span class="sig-name descname"><span class="pre">convert_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.convert_images" title="Link to this definition"></a></dt>
+<dd><p>Convert images to an image format</p>
+<p>GLTF files can store the image data in three different formats:
+In the buffers, as a data uri string and as external images files.
+This converts the images between the formats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_format</strong> (<em>ImageFormat</em>) – Destination Image format.</p></li>
+<li><p><strong>destination_dir</strong> (<em>str</em>) – Destination path, optional.
+Must be a directory. If None, will use load directory.</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em>) – Default = False. Set to True to overwrite a file if
+it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.export_image">
+<span class="sig-name descname"><span class="pre">export_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.export_image" title="Link to this definition"></a></dt>
+<dd><p>Export an image to a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_index</strong> (<em>int</em>) – Image index</p></li>
+<li><p><strong>destination</strong> (<em>str</em>) – Destination path. Can be a directory or a file.</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em>) – Default = False. Set to True to overwrite a file if
+it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.extensions">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extensions</span></span><a class="headerlink" href="#pygltflib.GLTF2.extensions" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.extensionsRequired">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extensionsRequired</span></span><a class="headerlink" href="#pygltflib.GLTF2.extensionsRequired" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.extensionsUsed">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extensionsUsed</span></span><a class="headerlink" href="#pygltflib.GLTF2.extensionsUsed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.extras">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extras</span></span><a class="headerlink" href="#pygltflib.GLTF2.extras" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.get_bin_name_from_path">
+<span class="sig-name descname"><span class="pre">get_bin_name_from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.get_bin_name_from_path" title="Link to this definition"></a></dt>
+<dd><p>Remove an extension and path and return a bin filename (sans path)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.get_data_from_buffer_index">
+<span class="sig-name descname"><span class="pre">get_data_from_buffer_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bufferIndex</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.get_data_from_buffer_index" title="Link to this definition"></a></dt>
+<dd><p>bufferIndex = bufferView.buffer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.get_data_from_buffer_uri">
+<span class="sig-name descname"><span class="pre">get_data_from_buffer_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.get_data_from_buffer_uri" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.gltf_from_json">
+<span class="sig-name descname"><span class="pre">gltf_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.gltf_from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.gltf_to_json">
+<span class="sig-name descname"><span class="pre">gltf_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">separators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'</span>&#160; <span class="pre">'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pygltflib.GLTF2.gltf_to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.identify_uri">
+<span class="sig-name descname"><span class="pre">identify_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.identify_uri" title="Link to this definition"></a></dt>
+<dd><p>Identify the format of the requested buffer. File, data or binary blob.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uri</strong> (<em>str</em><em>, </em><em>optional.</em>) – Either a data URI that embeds binary resources in the glTF
+JSON, a relative path or None.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Buffer format. None if failed to identify buffer format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BufferFormat or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.images">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">images</span></span><a class="headerlink" href="#pygltflib.GLTF2.images" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.load">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.load" title="Link to this definition"></a></dt>
+<dd><p>Load a .gltf, .glb or .bin file from a file or file-like binary object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>source</strong> (<em>str</em><em> or </em><em>Any</em>) – Path of file to load or file-like binary object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pygltflib.v2.schema.GLTF2Data instance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pygltflib.v2.schema.GLTF2Data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.load_binary">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.load_binary" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.load_from_bytes">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_from_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bytes_read</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.load_from_bytes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.materials">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">materials</span></span><a class="headerlink" href="#pygltflib.GLTF2.materials" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.meshes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">meshes</span></span><a class="headerlink" href="#pygltflib.GLTF2.meshes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.nodes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><a class="headerlink" href="#pygltflib.GLTF2.nodes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.path_dir">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path_dir</span></span><a class="headerlink" href="#pygltflib.GLTF2.path_dir" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.remove_bufferView">
+<span class="sig-name descname"><span class="pre">remove_bufferView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer_view_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.remove_bufferView" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.samplers">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">samplers</span></span><a class="headerlink" href="#pygltflib.GLTF2.samplers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_alignment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.save" title="Link to this definition"></a></dt>
+<dd><p>Save a .gltf or .glb file and optionnally a .bin file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>destination</strong> (<em>str</em><em> or </em><em>Path</em>) – Path of file to save. Use .gltf or .glb extension.</p></li>
+<li><p><strong>min_alignment</strong> (<em>int</em>) – minimum alignment, optional.
+Set the minimum alignment for chunks.
+A larger alignment may still be used if necessary.
+Only power-of-two alignments are supported.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.save_binary">
+<span class="sig-name descname"><span class="pre">save_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_alignment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.save_binary" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.save_to_bytes">
+<span class="sig-name descname"><span class="pre">save_to_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygltflib.GLTF2.save_to_bytes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.scene">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scene</span></span><a class="headerlink" href="#pygltflib.GLTF2.scene" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.scenes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scenes</span></span><a class="headerlink" href="#pygltflib.GLTF2.scenes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.skins">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">skins</span></span><a class="headerlink" href="#pygltflib.GLTF2.skins" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pygltflib.GLTF2.textures">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">textures</span></span><a class="headerlink" href="#pygltflib.GLTF2.textures" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Samuel Austin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
