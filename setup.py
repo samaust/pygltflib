@@ -8,7 +8,7 @@ import setuptools
 here = pathlib.Path(__file__).parent
 __version__ = re.search(
     r'__version__\s*=\s*[\'"]([^\'"]*)[\'"]',  # It excludes inline comment too
-    io.open(here / 'pygltflib' / '__init__.py', encoding='utf_8_sig').read()
+    io.open(here / 'pygltflib' / 'v2' / 'schema.py', encoding='utf_8_sig').read()
     ).group(1)
 
 
